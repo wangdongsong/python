@@ -7,6 +7,11 @@ import re #正则表达式引入
 if __name__ == "__main__":
     r = requests.get("http://python123.io/ws/demo.html")
     soup = BeautifulSoup(r.text, "html.parser")
+
+    #下面两行代码结果相同
+    print(soup("p", "course"))
+    print(soup.find_all("p", "course"))
+
     #所有a标签
     for link in soup.find_all("a"):
         print(link.get("href"))
