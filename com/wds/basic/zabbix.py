@@ -27,7 +27,7 @@ def print_sys_info():
     print(proc.num_handles())
 
 if __name__ == "__main__":
-    proc = psutil.Process(8384)
+    #proc = psutil.Process(8384)
     #print(proc.name())
     #print(proc.connections())
     #for conn in proc.connections():
@@ -39,8 +39,10 @@ if __name__ == "__main__":
     while(0 == 0):
         sleep(1)
         proc = process_info("pycharm64.exe")
+        print(proc.exe())
         print(proc.cpu_times)
-    print(proc.cpu_percent())
+        print(proc.threads())
+        print(proc.cpu_percent())
     #print(proc.memory_info)
     #print(proc.memory_percent())
     #for memmap in proc.memory_maps():
