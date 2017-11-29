@@ -4,7 +4,7 @@ import numpy as np
 x = np.array([4, 432, 21], int)
 print(x)
 
-x2d = np.array(((100, 200,300), (111,222,333), (123, 456, 789)))
+x2d = np.array(((100, 200,300), (111,222,333), (123, 456, 789), (555, 555, 555)))
 print(x2d)
 
 #3 * 3
@@ -28,3 +28,21 @@ print(x2d[1:, 1])
 # 循环
 for row in x2d:
     print(row)
+
+
+# 数据变形与转换
+print("数据变形与转换")
+print(x2d)
+x2d.ravel
+print("--ravel--")
+print(x2d)
+print("--resize(3,6)--")
+x2d.resize((4, 3))
+print(x2d)
+print("--reshape(3,3)--")
+x2d.reshape(4, 3)
+print(x2d)
+print("--shape--")
+x2d.shape=(6, 2)
+print(x2d)
+
