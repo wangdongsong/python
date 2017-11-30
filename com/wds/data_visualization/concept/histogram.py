@@ -1,4 +1,13 @@
-# 柱状图
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 28 06:46:41 2017
+
+柱状图
+
+@author: wangdongsong1229@163.com
+"""
+
+
 
 import numpy as np
 import matplotlib.pyplot as plt
