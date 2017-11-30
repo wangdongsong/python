@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+"""
+Created on Wed Nov 29 08:39:23 2017
+
+ndarray 基础
+
+@author: wangdongsong1229@163.com
+"""
+
 import numpy as np
 x = np.array([4, 432, 21], int)
 print(x)
