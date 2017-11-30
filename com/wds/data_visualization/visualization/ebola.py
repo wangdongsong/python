@@ -6,6 +6,8 @@ Ebola案例（2014年，伊波拉病毒死亡人数案例）
 
 数据源：ebola_data_db_format.csv
 
+https://ds-ec2.scraperwiki.com/g7nnqgn/ckm9nsfssakeuor/cgi-bin/csv/ebola_data_db_format.csv
+
 @author: wangdongsong1229@163.com
 """
 

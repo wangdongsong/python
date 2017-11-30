@@ -6,6 +6,8 @@ Ebola案例：确认的、可能的、疑似的Ebola死亡累积数
 
 数据源：ebola_data_db_format.csv
 
+https://ds-ec2.scraperwiki.com/g7nnqgn/ckm9nsfssakeuor/cgi-bin/csv/ebola_data_db_format.csv
+
 @author: wangdongsong1229@163.com
 """
 
