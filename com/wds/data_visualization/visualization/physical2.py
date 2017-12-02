@@ -4,7 +4,9 @@ Created on 2017/12/1 6:21
 
 体育案例，数据原:qb_data.csv
 
-转换X和Y轴
+线图
+
+pyhsical的图转换X和Y轴
 
 http://www.knapdata.com/python/qb_data.csv
 
