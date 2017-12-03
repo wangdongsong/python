@@ -2,7 +2,7 @@
 """
 Created on 2017/12/3 11:56
 
-3D chart
+chapter04:3D chart
 
 @author: wangdongsong1229@163.com
 """
