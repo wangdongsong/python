@@ -15,7 +15,8 @@ import pymysql
 # set threshold as a percent
 MINSUPPORTPCT = 10
 
-# database connection parameters
+# databas
+# e connection parameters
 dbhost = 'cs.elon.edu'
 dbschema = 'test'
 dbuser = 'msquire'
