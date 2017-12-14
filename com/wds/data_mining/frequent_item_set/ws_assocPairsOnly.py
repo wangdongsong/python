@@ -29,7 +29,6 @@ allSingletonTags = []
 allDoubletonTags = set()
 doubletonSet = set()
 
-
 def findDoubletons():
     print("======")
     print("Frequent doubletons found:")
