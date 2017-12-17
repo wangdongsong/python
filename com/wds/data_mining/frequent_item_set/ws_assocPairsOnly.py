@@ -11,6 +11,7 @@ Notes:
 """
 import itertools
 import pymysql
+import getpass
 
 # set threshold as a percent
 MINSUPPORTPCT = 10
