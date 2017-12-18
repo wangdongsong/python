@@ -11,6 +11,7 @@ Notes:
 """
 import itertools
 import pymysql
+import getpass
 
 # set threshold as a percent
 MINSUPPORTPCT = 10
@@ -23,6 +24,7 @@ dbuser = 'msquire'
 dbpasswd = getpass.getpass()
 dbport = 3306
 dbcharset = 'utf8mb4'
+
 
 # variables to hold our sets of possible singletons, possible pairs, and definite pairs
 allSingletonTags = []
