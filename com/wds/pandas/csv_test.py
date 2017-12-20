@@ -28,3 +28,13 @@ books = read_csv(bookDataFilePath, sep=";", names=book_columns, usecols = range(
 
 print(books)
 print(books.dtypes)
+
+print(users.describe())
+
+print(books.head(10))
+
+print(books.tail(8))
+
+print(books[5:10])
+
+print("Location-----------", users["Location"].head())
