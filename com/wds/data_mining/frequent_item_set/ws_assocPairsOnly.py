@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-File: assocPairsOnly.py
-@author: Megan Squire
-Purpose: Finds frequent itemsets of ws entities.
 
-Notes:
-1. Uses a MySQL database to store the tags, doubletons, tripletons. Code for
-  SQL setup is in attached file.
-2. Minimum support for itemsets is set in the MINSUPPORT constant.
+Created on 2017/12/10 22:00
+
+@author: wangdongsong1229@163.com
+
 """
 import itertools
 import pymysql
@@ -16,11 +13,10 @@ import getpass
 # set threshold as a percent
 MINSUPPORTPCT = 10
 
-# databas
-# e connection parameters
-dbhost = 'cs.elon.edu'
-dbschema = 'test'
-dbuser = 'msquire'
+# database connection params
+dbhost = 'localhost'
+dbschema = 'dataming'
+dbuser = 'wds'
 dbpasswd = getpass.getpass()
 dbport = 3306
 dbcharset = 'utf8mb4'
@@ -121,8 +117,7 @@ db = pymysql.connect(host=dbhost,
 cursor = db.cursor()
 
 # calculate total number of baskets (people)
-queryBaskets = "SELECT count(DISTINCT personID) \
-                FROM ws_distinct_people_entity_tags;"
+queryBaskets = "SELECT count(DISTINCT personID) FROM ws_distinct_people_entity_tags;"
 cursor.execute(queryBaskets)
 baskets = cursor.fetchone()[0]
 
