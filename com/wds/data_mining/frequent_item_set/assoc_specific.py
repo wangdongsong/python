@@ -12,9 +12,9 @@ X = 'Internet'
 Y = 'Web'
 
 # database connection params
-dbhost = 'cs.elon.edu'
-dbschema = 'test'
-dbuser = 'msquire'
+dbhost = 'localhost'
+dbschema = 'dataming'
+dbuser = 'wds'
 dbpasswd = getpass.getpass()
 dbport = 3306
 dbcharset = 'utf8mb4'
