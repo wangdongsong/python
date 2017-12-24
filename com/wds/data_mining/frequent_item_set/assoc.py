@@ -14,6 +14,7 @@ Notes:
 
 import itertools
 import pymysql
+import getpass
 import logging
 
 MINSUPPORTPCT = 5 #可以是任意常数，默认为5
@@ -23,8 +24,21 @@ allDoubletonTags = set()
 doubletonSet = set()
 
 #连接数据库
-db = pymysql.connect(host="localhost", db="python", user="test", password="test", port=3306, charset="utf8mb4")
+dbhost = 'localhost'
+dbschema = 'dataming'
+dbuser = 'wds'
+dbpasswd = getpass.getpass()
+dbport = 3306
+dbcharset = 'utf8mb4'
 
+# Open local database connection
+db = pymysql.connect(host=dbhost,
+                     db=dbschema,
+                     user=dbuser,
+                     passwd=dbpasswd,
+                     port=dbport,
+                     charset=dbcharset,
+                     autocommit=True)
 cursor = db.cursor()
 
 
@@ -35,10 +49,10 @@ baskets = cursor.fetchone()[0]
 
 #使用蓝子数和前面设置的最小支持阈值，计算蓝子的最小数量
 minsupport = baskets * (MINSUPPORTPCT / 100)
-print("Minimum support count:", minsupport, "(", MINSUPPORTPCT, "%of", baskets, ")")
+print("Minimum support count:", minsupport, "(", MINSUPPORTPCT, "% of", baskets, ")")
 
 #得到一组符合最小标签阈值的标签
-cursor.execute("select distinct tage_name from fc_project_tags group by 1 having count(project_id) >= %s order by tage_name", (minsupport))
+cursor.execute("select distinct tag_name from fc_project_tags group by 1 having count(project_id) >= %s order by tag_name", (minsupport))
 singletons = cursor.fetchall()
 
 
@@ -50,12 +64,12 @@ def findDoubletons():
     for (index, candidate) in enumerate(doubletonCandidates):
         tag1 = candidate[0]
         tag2 = candidate[1]
-        cursor.execute(("select count(fpt1.project_id) "
+        cursor.execute("select count(fpt1.project_id) "
                         "from fc_project_tags fpt1 "
                         "inner join fc_project_tags fpt2 "
                         "on fpt1.project_id = fpt2.project_id "
                         "where fpt1.tag_name = %s and fpt2.tag_name = %s"
-                        , (tag1, tag2)))
+                        , (tag1, tag2))
         count = cursor.fetchone()[0]
         if count > minsupport:
             logging.info(tag1, tag2, "[", count, "]")
@@ -77,7 +91,7 @@ def findTripletons():
 
         tripletonCandidateRejected = 0
 
-        for(index,  doubleton) in enumerate:
+        for(index,  doubleton) in enumerate(doubletonsInsideTripleton):
             if doubleton not in doubletonSet:
                 tripletonCandidateRejected = 1
                 break
@@ -92,7 +106,7 @@ def findTripletons():
                            "and fpt2.tag_name = %s "
                            "and fpt3.tag_name = %s )",
                            (candidate[0], candidate[1], candidate[2]))
-            count = cursor.fetchall()[0]
+            count = cursor.fetchone()[0]
 
             if count > minsupport:
                 logging.info(candidate[0], ",", candidate[1], ",", candidate[2], "[", count, "]")
@@ -117,7 +131,7 @@ def generateRules():
 
         calcSCAV(tag1, tag2, tag3, ruleSupport)
         calcSCAV(tag1, tag3, tag2, ruleSupport)
-        calcSCAV(tag3, tag2, tag1, ruleSupport)
+        calcSCAV(tag2, tag3, tag1, ruleSupport)
         logging.info("*")
 
 
@@ -135,7 +149,7 @@ def calcSCAV(tagA, tagB, tagC, ruleSupport):
     supportTagCPct = supportTagC / baskets
     addedValue = round((confidence - supportTagCPct), 2)
 
-    logging.info(tagA, ", ", tagB, "->", tagC, "[S=", ruleSupportPct, ", C=", confidence, ", AV=", addedValue, "]")
+    print(tagA, ", ", tagB, "->", tagC, "[S=", ruleSupportPct, ", C=", confidence, ", AV=", addedValue, "]")
 
 
 
@@ -143,6 +157,8 @@ def calcSCAV(tagA, tagB, tagC, ruleSupport):
 
 for(singletons) in singletons:
     allSingletonTags.append(singletons[0])
+
+print("allSingletonTags=", allSingletonTags)
 
 #使用频繁的单例创建侯选二元组
 findDoubletons()
