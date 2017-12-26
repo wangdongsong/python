@@ -28,3 +28,21 @@ for review in tokenized_docs:
     tokenized_docs_no_punctuation.append(new_review)
 
 print(tokenized_docs_no_punctuation)
+
+# 1.2.2 文本的大小写转换
+# 通过lower和upper函数
+
+text = "HAWork is KeY to SUCCESS"
+print(text.lower())
+print(text.upper())
+
+# 1.2.3 处理停止词
+# 停止词是指在执行信息检索或其它自然语言任务时需要被过滤掉的词，这些词对理解句子整体意思没多大意义。
+# 消除停止词在NLP中被认为至关重要 的标准化任务之一
+
+from nltk.corpus import stopwords
+
+stops = set(stopwords.words("english"))
+words = ["Don't", "hesitate", "to", "ask", "question"]
+stop_word = [word for word in words if word not in stops]
+print(stop_word)
