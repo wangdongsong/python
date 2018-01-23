@@ -25,3 +25,13 @@ before_text=word_tokenize("Don't hesitate to ask question")
 print(before_text)
 after=word_tokenize(replacer.replace("Don't hesitate to ask question"))
 print(after)
+
+#处理重复字符
+from replace import RepeatReplacer
+replacer = RepeatReplacer()
+repeat_text = replacer.replace("lotttt")
+print(repeat_text)
+repeat_text = replacer.replace("happy")
+print(repeat_text)
+repeat_text = replacer.replace_wordnet("happy")
+print(repeat_text)
