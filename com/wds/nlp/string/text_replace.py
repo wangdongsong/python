@@ -2,7 +2,7 @@
 """
 Created on Tue Jan 23 09:13:07 2018
 
-使用replace.py中的类替换文本
+1.3 文本替换：使用replace.py中的类替换文本
 
 @author: wangdongsong1229@163.com
 """
@@ -35,3 +35,8 @@ repeat_text = replacer.replace("happy")
 print(repeat_text)
 repeat_text = replacer.replace_wordnet("happy")
 print(repeat_text)
+
+#同义词替换示例
+from replace import WordReplacer
+replacer=WordReplacer({"congrats":"congratulations"})
+print(replacer.replace("congrats"))
