@@ -66,4 +66,22 @@ mean_ratings = mean_ratings.ix[active_titles]
 #print(mean_ratings.columns)
 #print(type(mean_ratings))
 top_female_ratings = mean_ratings.sort_values(by = "F", ascending = False)
-print(top_female_ratings)
+#print(top_female_ratings)
+
+"""
+计算评分分歧
+"""
+#找出男性和女性观众分赴最大的电影，其中一个办法是给mean_ratings加上一个用天存放平均得分之差的列
+mean_ratings["diff"] = mean_ratings["M"] - mean_ratings["F"]
+
+#按diff排序即可得分歧最大且女性观众更喜欢的电影
+sorted_by_diff = mean_ratings.sort_values(by="diff")
+#print(sorted_by_diff[:15])
+
+#反序得到男性更喜欢的电影
+#print(sorted_by_diff[::-1][:15])
+
+#找出分歧最大的电影和（不考虑性别因素），则可以计算得分数据的方差或标准差
+#标准差
+rating_std_by_title = data.groupby("title")["rating"].std()
+print(rating_std_by_title.order(ascending=False)[:10])
