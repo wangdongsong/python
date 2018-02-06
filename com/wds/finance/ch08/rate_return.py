@@ -8,6 +8,7 @@ Created on 2018/2/6 21:58
 """
 
 import numpy as np
+import pandas as pd
 
 #假定如下4个价格
 p = np.array([1, 1.1, 0.9, 1.05])
@@ -24,3 +25,9 @@ print(p[1:])
 #以上面的顺序为价格，计算回报算如下
 ret = (p[1:] - p[:-1]) / p [:-1]
 print(ret)
+
+xdate = pd.read_csv("IBM.csv",  usecols=[1, 4], skip_blank_lines=True)
+print(xdate[:2])
+
+xret = xdate[1:] - xdate[:-1] / xdate[:-1]
+print("###", xret)
