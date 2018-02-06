@@ -27,6 +27,8 @@ print(data.tail())
 
 """
 使用日期变量
+使用parse_dates或date_parse参数指定某一列作为日期列
 """
 xdate = pd.read_csv("IBM.csv", index_col=0, parse_dates=True)
 print(xdate[:2])
+
