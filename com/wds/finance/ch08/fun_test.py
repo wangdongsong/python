@@ -32,3 +32,22 @@ print(data.tail())
 xdate = pd.read_csv("IBM.csv", index_col=0, parse_dates=True)
 print(xdate[:2])
 
+
+"""
+使用DataFrame数据类型
+"""
+#使用read_csv或read_table函数从外部文本文件输入数据时，得到的数据就是DataFrame类型
+df = pd.DataFrame(sp.random.rand(8, 1), columns = ["A"], dtype="float32")
+print(df)
+
+#日志作为索引
+index = pd.date_range("2017/1/1", periods=8)
+cc = ["A", "B", "C"]
+#print(type(cc))
+df = pd.DataFrame(sp.random.rand(8, 3), index=index, columns=cc)
+print(df)
+
+#对IBM财经数据中日期和调整后的收盘价感兴趣，可以以日期作为索引变量
+#使用0，6两列，0作为索引
+xdate = pd.read_csv("IBM.csv", usecols=[0, 6], index_col=0)
+print(xdate.head())
