@@ -41,5 +41,11 @@ for year in years:
     pieces.append(frame)
 
 #将数据整合到单个DataFrame中
+#concat默认按行将多个DataFrame组合到一起
+#必须指定ignore_index=True，不需要保留原始行号，得到全的数据
 names = pd.concat(pieces, ignore_index = True)
 #print(type(pieces))
+
+#按年份分组，对性别做sum聚合
+total_births = names.pivot_table("births", rows = "year", cols = "sex", aggfunc = sum)
+print(total_births)
