@@ -47,5 +47,42 @@ names = pd.concat(pieces, ignore_index = True)
 #print(type(pieces))
 
 #按年份分组，对性别做sum聚合
-total_births = names.pivot_table("births", rows = "year", cols = "sex", aggfunc = sum)
-print(total_births)
+total_births = names.pivot_table("births", index = "year", columns = "sex", aggfunc = sum)
+#print(total_births)
+
+
+#插入一个prop列，用于存放指定名字的婴儿数相对于总出生数的比例。
+#0.02表示每100个婴儿中有2个取了当前的名字
+def add_prop(group):
+    #整数除法会向下调整
+    births = group.births.astype(float)
+    
+    group["prop"] = births / births.sum()
+    
+    return group
+
+add_names = names.groupby(["year", "sex"]).apply(add_prop)
+print(names[:2])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
