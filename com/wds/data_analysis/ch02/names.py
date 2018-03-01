@@ -10,6 +10,7 @@ Created on Wed Jan 31 19:42:50 2018
 """
 
 import pandas as pd
+import numpy as np
 import os
 
 #数据文件以逗号分隔，使用read_csv的方式处理
@@ -19,7 +20,7 @@ print(names1880[:2])
 
 #年births统计数据
 births1880 = names1880.groupby("sex").births.sum()
-print(births1880)
+#print(births1880)
 
 
 """
@@ -53,6 +54,7 @@ total_births = names.pivot_table("births", index = "year", columns = "sex", aggf
 
 #插入一个prop列，用于存放指定名字的婴儿数相对于总出生数的比例。
 #0.02表示每100个婴儿中有2个取了当前的名字
+#births是整数，在计算分工时 ，将分子、分母转换成浮点数
 def add_prop(group):
     #整数除法会向下调整
     births = group.births.astype(float)
@@ -62,13 +64,24 @@ def add_prop(group):
     return group
 
 add_names = names.groupby(["year", "sex"]).apply(add_prop)
-print(names[:2])
+#print(names[:2])
+
+#处理prop比例时，做一般性检查，验证所有分组的prop的总和是否为1
+isOne = np.allclose(add_names.groupby(["year", "sex"]).prop.sum(), 1)
+print(isOne)
 
 
+#获取Top1000数据子集
+#针对sex/year组合的前1000个名字
 
+def get_top1000(group):
+    #return group.sort_index(by="births", ascending=False)[:1000]
+    return group.sort_values(by="births", ascending=False)[:1000]
 
+grouped1000 = add_names.groupby(["year", "sex"])
+top1000 = grouped1000.apply(get_top1000)
 
-
+print(top1000[:2])
 
 
 
