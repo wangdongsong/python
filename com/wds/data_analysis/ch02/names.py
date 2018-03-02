@@ -81,7 +81,20 @@ def get_top1000(group):
 grouped1000 = add_names.groupby(["year", "sex"])
 top1000 = grouped1000.apply(get_top1000)
 
-print(top1000[:2])
+#print(top1000[:2])
+
+"""
+分析命名趋势
+"""
+#将Top1000的名字分为男女两个部分
+boys = top1000[top1000.sex == "M"]
+girls = top1000[top1000.sex == "F"]
+
+#按年和name统计
+total_births = top1000.pivot_table("births", index = "year", columns = "name", aggfunc = sum)
+
+subset = total_births [["John", "Harry", "Mary", "Marilyn"]]
+subset.plot(subplots = True, figsize = (12, 10), grid = False, title = "Number of births per year")
 
 
 
