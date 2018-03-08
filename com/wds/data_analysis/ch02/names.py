@@ -96,9 +96,30 @@ total_births = top1000.pivot_table("births", index = "year", columns = "name", a
 subset = total_births [["John", "Harry", "Mary", "Marilyn"]]
 subset.plot(subplots = True, figsize = (12, 10), grid = False, title = "Number of births per year")
 
+"""
+评估命名多样性的增长
 
+从《分析命名趋势》图中可以看出取常见名字的越来越少
+1980年后起相同的常见的名字越来越少，可以从数据中行到验证，一个办法是计算最流行的1000个名字所占的比例，按year和sex进行聚合并绘图
+"""
+table = top1000.pivot_table("prop", index = "year", columns = "sex", aggfunc = sum)
+table.plot(title = "Sum of table1000.prop by year and sex", yticks = np.linspace(0, 1.2, 13), xticks = range(1880, 2020, 10))
 
+#另一种方法：计算占总出生人数前50%的不同名字的数量，只考虑2010年男孩的名字
+#df = boys[boys.year == 2010]
+#prop_cumsum = df.sort_index(by = "prop", ascending = False).prop.cumsum()
+#prop_cumsum.searchsorted(0.5) + 1
 
+def get_quantile_count(group, q = 0.5):
+    group = group.sort_index(by = "prop", ascending=False)
+    #特别说明，后面要取[0]，数据类型为object
+    return group.prop.cumsum().searchsorted(q)[0]
+
+diversity = top1000.groupby(["year", "sex"]).apply(get_quantile_count)
+diversity = diversity.unstack("sex")
+print(diversity.head())
+
+diversity.plot(title = "Number of popular names in top 50%")
 
 
 
