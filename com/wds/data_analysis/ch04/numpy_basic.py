@@ -117,12 +117,44 @@ arr3d[0] = old_values
 
 #print(arr3d[1, 0])
 
-#切片索引
+"""
+切片索引
+"""
 #print(arr[1:6])
 #高维数组索引切片
-print(arr2d)
+#print(arr2d)
 #print(arr2d[:1])
 #print(arr2d[:1, :3])
 #print(arr2d[1,:])
 #纵向取第一列
-print(arr2d[:, 1])
+#print(arr2d[:, 1])
+
+
+"""
+布尔索引
+"""
+names = np.array(["Bob", "Joe", "Will", "Bob", "Will", "Joe", "Joe"])
+#随机生成7行4列的正态数据分布
+data = np.random.rand(7, 4)
+#print(data)
+#假定name中的每个名字对应data中的一行数据。7个名字，7行数据
+#取出对应Bob所对应的所有行
+#名字为Bob的为True，其它为False
+#print(names == "Bob")
+#取出对应行的数据
+print(data[names == "Bob"])
+#布尔索引切片
+print(data[names == "Bob", :1])
+#取出非Bob名字所对应的行，两种方法
+#print(names != "Bob")
+#print(data[ ~(names == "Bob")])
+#print(data[ ~(names == "Bob"), 1])
+
+mask = (names == "Bob") | (names == "Will")
+print(data[mask])
+
+#应用，将所有负值变为0
+data[data < 0.5] = 0
+print(data)
+data[names != "Joe" ] = 7
+print(data)
