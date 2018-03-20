@@ -142,19 +142,41 @@ data = np.random.rand(7, 4)
 #名字为Bob的为True，其它为False
 #print(names == "Bob")
 #取出对应行的数据
-print(data[names == "Bob"])
+#print(data[names == "Bob"])
 #布尔索引切片
-print(data[names == "Bob", :1])
+#print(data[names == "Bob", :1])
 #取出非Bob名字所对应的行，两种方法
 #print(names != "Bob")
 #print(data[ ~(names == "Bob")])
 #print(data[ ~(names == "Bob"), 1])
 
 mask = (names == "Bob") | (names == "Will")
-print(data[mask])
+#print(data[mask])
 
 #应用，将所有负值变为0
 data[data < 0.5] = 0
-print(data)
+#print(data)
 data[names != "Joe" ] = 7
-print(data)
+#print(data)
+
+
+"""
+花式索引
+Fancy Indexing
+"""
+arr = np.empty((8, 4))
+for i in range(8):
+    arr[i] = i
+
+#选取特定子集
+subarr = arr[[4, 3, 0, 6]]
+print(subarr)
+#负数索引
+subarr = arr[[-7, -1]]
+print(subarr)
+
+arr = np.arange(32).reshape((8, 4))
+#取出 的数据为(1, 0), (5, 3), (7, 1), (2, 2)
+print(arr[[1, 5, 7, 2], [0, 3, 1, 2]])
+#取出区域（1，0）， （1， 3）， （1， 1）， （1，2）.....
+print(arr[np.ix_([1, 5, 7, 2], [0, 3, 1, 2])])
