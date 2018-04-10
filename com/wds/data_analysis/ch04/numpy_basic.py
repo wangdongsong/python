@@ -170,13 +170,24 @@ for i in range(8):
 
 #选取特定子集
 subarr = arr[[4, 3, 0, 6]]
-print(subarr)
+#print(subarr)
 #负数索引
 subarr = arr[[-7, -1]]
-print(subarr)
+#print(subarr)
 
 arr = np.arange(32).reshape((8, 4))
 #取出 的数据为(1, 0), (5, 3), (7, 1), (2, 2)
-print(arr[[1, 5, 7, 2], [0, 3, 1, 2]])
+#print(arr[[1, 5, 7, 2], [0, 3, 1, 2]])
 #取出区域（1，0）， （1， 3）， （1， 1）， （1，2）.....
-print(arr[np.ix_([1, 5, 7, 2], [0, 3, 1, 2])])
+#print(arr[np.ix_([1, 5, 7, 2], [0, 3, 1, 2])])
+
+
+"""
+数组转置和轴对换
+"""
+arr = np.arange(15).reshape((3, 5))
+print(arr)
+#行列转换
+print(arr.T)
+
+print(np.dot(arr.T, arr))
