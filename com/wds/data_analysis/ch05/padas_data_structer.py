@@ -59,8 +59,25 @@ obj4 = Series(sdata, index = states)
 obj4.name = "population"
 obj4.index.name = "state"
 
-print(obj4)
-print("#####")
+#print(obj4)
+#print("#####")
 #通过索引的赋值方式修改
 obj4.index = ["ac", "ab", "bc", "ba", "le"]
-print(obj4)
+#print(obj4)
+
+"""
+DataFrame
+"""
+
+#创建，等长列或NumPy数组
+data = {"state": ["Ohio", "Ohio", "Ohio", "Nevada", "Nevada"],
+        "year": [2000, 2001, 2002, 2001, 2002],
+                "pop": [1.5, 1.7, 3.6, 2.4, 2.9]}
+
+frame = DataFrame(data)
+
+#指定frame的序列
+frame = DataFrame(data, columns = ["year", "state", "pop"])
+
+#如果传入的列不存在，就会产生NaN值
+frame2 = DataFrame(data, columns = ["year", "state", "pop", "debt"], index = ["one", "two", "three", "four", "five"])
