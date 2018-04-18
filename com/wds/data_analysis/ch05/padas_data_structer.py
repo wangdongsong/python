@@ -81,3 +81,12 @@ frame = DataFrame(data, columns = ["year", "state", "pop"])
 
 #如果传入的列不存在，就会产生NaN值
 frame2 = DataFrame(data, columns = ["year", "state", "pop", "debt"], index = ["one", "two", "three", "four", "five"])
+
+#print(frame.columns)
+
+#通过类似字典的方式将DataFrame的列获取为一个Series，纵向获取，列
+print(frame2["state"])
+print(frame.year)
+
+#横向获取数据，行
+print(frame2.ix["three"])
