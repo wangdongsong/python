@@ -90,3 +90,5 @@ print(frame.year)
 
 #横向获取数据，行
 print(frame2.ix["three"])
+
+#
