@@ -91,4 +91,11 @@ print(frame.year)
 #横向获取数据，行
 print(frame2.ix["three"])
 
-#
+#补缺省值
+frame2["debt"] = 16.5
+
+frame2["debt"] = np.arange(5.)
+
+#列表或数组赋值给某个列时，长度必须与DataFrame的长度相匹配，如果赋值是Series，则精确匹配DataFrame的索引，空位被填上缺失值
+val = Series([1.2, 1.5, 1.7], index = ["two", "four", "five"])
+frame2["debt"] = val
