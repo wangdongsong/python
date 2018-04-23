@@ -9,6 +9,7 @@ padas的数据结构介绍
 
 from pandas import Series, DataFrame
 import pandas as pd
+import numpy as np
 
 """
 Series
@@ -99,3 +100,12 @@ frame2["debt"] = np.arange(5.)
 #列表或数组赋值给某个列时，长度必须与DataFrame的长度相匹配，如果赋值是Series，则精确匹配DataFrame的索引，空位被填上缺失值
 val = Series([1.2, 1.5, 1.7], index = ["two", "four", "five"])
 frame2["debt"] = val
+
+#新增列
+frame2["eastern"] = frame2.state == "Ohio"
+print(frame2.columns)
+
+#del删除列
+del frame2["eastern"]
+
+print(frame2.columns)
