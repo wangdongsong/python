@@ -109,3 +109,21 @@ print(frame2.columns)
 del frame2["eastern"]
 
 print(frame2.columns)
+
+#嵌套字典：外层字典的键作为列，内层键作为行索引
+#内层的键会被合并、排序以形成最终的索引
+pop = {"Nevada" : {2001:2.4, 2002: 2.9}, "Ohio": {2000: 1.5, 2001:1.7, 2002: 3.6}}
+frame3 = DataFrame(pop)
+#行列转换
+print(frame3.T)
+
+#显式指定索引，则不会被合并、排序
+frame4 = DataFrame(pop, index=[2001, 2003, 2002])
+
+#指定DataFrame的index和columns的name属性
+frame3.index.name = "year"
+frame3.columns.name = "state"
+print(frame3)
+
+#values属性会以二维ndarray的形式返回DataFrame中的数据
+print(frame3.values)
