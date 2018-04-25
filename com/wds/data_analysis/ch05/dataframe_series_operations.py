@@ -62,3 +62,15 @@ frame6 = frame.ix[["a", "b", "c", "d"], states]
 丢弃指定轴上的项
 
 """
+obj = Series(np.arange(5), index = ["a", "b", "c", "d", "e"])
+drop_obj = obj.drop("c")
+drop_obj = obj.drop(["b", "d"])
+
+#对于DataFrame，可以删除任意轴上的索引值
+data = DataFrame(np.arange(16).reshape((4, 4)), index = ["Ohio", "Colorado", "Utah", "New York"], columns = ["one", "tow", "three", "four"])
+data2 = data.drop(["Ohio", "Colorado"])
+
+
+"""
+
+"""
