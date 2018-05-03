@@ -104,7 +104,7 @@ data[data < 5] = 0
 
 #通过ix的方式切片、索引
 #print(data.ix["Colorado", ["two", "three"]])
-#print(data.ix["Colorado", [1, 2]])
+print(data.ix["Colorado", [1, 2]])
 #print(data.ix[["Colorado", "Utah"], [1, 2]])
 
 #取行索引为2的数据
