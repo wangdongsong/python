@@ -53,4 +53,49 @@ series2 = Series(range(3), index = ["b", "e", "f"])
 #匹配行且在列上广播，则必须使用算术运算方法
 series3 = frame["d"]
 
-#print(frame.sub(series3, axis = 0))
+print(frame.sub(series3, axis = 0))
+
+"""
+函数应用和映射
+"""
+frame = DataFrame(np.random.randn(4, 3), columns = list("bde"), index = ["Utah", "Ohio", "Texas", "Oregon"])
+f = lambda x: x.max() - x.min()
+print(frame.apply(f))
+print(frame.apply(f, axis = 1))
+print(np.abs(frame))
+
+#最大值、最小值
+def f(x):
+    return Series([x.min(), x.max()], index = ["min", "max"])
+
+print(frame.apply(f))
+
+#排序、排名
+obj = Series(range(4), index = ["d", "a", "b", "c"])
+print(obj.sort_index())
+print(obj.sort_values())
+
+#对于DataFrame，可以在任意一轴上的索引进行排序，默认升序
+frame = DataFrame(np.arange(16).reshape((4, 4)), index = ["three", "one", "two", "four"], columns = ["d", "a", "b", "c"])
+print(frame.sort_index())
+print(frame.sort_index(axis = 1))
+#按降序
+print(frame.sort_index(axis = 1, ascending = False))
+
+#指定列排序
+print(frame.sort_values(by = "b", ascending = False))
+print(frame.sort_values(by = ["b", "a"], ascending = False))
+
+#排名
+print(obj.rank())
+print(obj.rank(method="first"))
+
+"""
+带有重复值的轴索引
+"""
+obj = Series(range(5), index = ["a", "a", "b", "b", "c"])
+print(obj.index.is_unique)
+print(obj["a"])
+
+df = DataFrame(np.random.randn(4, 3), index = ["a", "a", "b", "b"])
+print(df.ix["b"])
