@@ -29,3 +29,21 @@ print(df.idxmin())
 
 #描述性统计汇总
 print(df.describe())
+
+"""
+相关系数及协方差
+"""
+#import pandas.io.data as web
+import pandas_datareader.data as web
+import datetime
+
+all_data = {}
+start = datetime.datetime(2017, 1, 1) # or start = '1/1/2016'
+end = datetime.date.today()
+
+for ticker in ["AAPL", "IBM", "MSFT", "GOOG"]:
+    all_data[ticker] = web.get_data_yahoo(ticker, start, end)
+    
+price = DataFrame({tic: data["Adj Close"] for tic, data in all_data.iteritems()})
+returns = price.pct_change()
+
