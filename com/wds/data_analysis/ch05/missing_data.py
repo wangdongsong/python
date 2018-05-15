@@ -49,3 +49,10 @@ df = DataFrame(np.random.randn(7, 3))
 df.ix[:4, 1] = NA
 df.ix[:2, 2] = NA
 thresh_data = df.dropna(thresh = 3)
+
+
+"""
+填充缺失数据
+"""
+#fillna方法
+df.fillna(0)
