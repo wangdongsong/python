@@ -48,7 +48,7 @@ col_all = data.dropna(axis = 1, how = "all")
 df = DataFrame(np.random.randn(7, 3))
 df.ix[:4, 1] = NA
 df.ix[:2, 2] = NA
-thresh_data = df.dropna(thresh = 3)
+#thresh_data = df.dropna(thresh = 3)
 
 
 """
@@ -56,3 +56,5 @@ thresh_data = df.dropna(thresh = 3)
 """
 #fillna方法
 df.fillna(0)
+
+df.fillna({1:0.5, 3:-1})
